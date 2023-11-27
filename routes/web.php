@@ -1,6 +1,7 @@
 <?php
-
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\ProfileController;
+use App\Models\Book;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +16,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect(route('book.index'));
+    $books=Book::getAll();
+    return view('book.index',compact('books'));
 });
 
-Route::resource('book',BookController::class);
+Route::get('/dashboard', function () {
+    return redirect(route('book.index'));
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+
+
+
+    Route::resource('book',BookController::class);
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
