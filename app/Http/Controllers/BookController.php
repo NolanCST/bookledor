@@ -32,12 +32,12 @@ class BookController extends Controller
     public function store(Request $request)
     {
         // $actualyear = date ("Y");
-        $request->validate([
-            'title' => 'required|max:50',
-            'author' => 'required|max:50',
-            'year' => 'required|numeric|integer|max:2023',
-             'genders' => 'required|exists:genders,id',
-        ]);
+        // $request->validate([
+        //     'title' => 'required|max:50',
+        //     'author' => 'required|max:50',
+        //     'year' => 'required|numeric|integer|max:2023',
+        //     'genders' => 'required|exists:genders,id',
+        // ]);
 
        Book::create([
             'title' => $request->title,
@@ -51,7 +51,7 @@ class BookController extends Controller
         $year = $request -> year;
         $gender = $request -> gender_id;
 
-        return view('book.store', compact ('title', 'author', 'year','gender'));
+        return view('book.store', compact ('title', 'author', 'year', 'gender'));
     }
 
     /**

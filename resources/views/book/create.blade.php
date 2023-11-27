@@ -12,20 +12,24 @@
     @endif --}}
     <form action='{{route("book.store")}}' method='post'>
         @csrf
+        {{-- image: <input type='text' name='image' placeholder="Image" value='{{old('image')}}'> --}}
+        {{-- @if($errors->has('image'))
+            <p>{{$errors->first('image')}}</p>
+            @endif --}}
         Titre: <input type='text' name='title' placeholder='Titre du livre' value='{{old('title')}}' required>
-        {{-- @if($errors->has('title'))
+        @if($errors->has('title'))
             <p>{{$errors->first('title')}}</p>
-        @endif --}}
+        @endif
         <br>
         Auteur: <input type='text' name='author' placeholder="Auteur du livre" value='{{old('author')}}' required>
-        {{-- @if($errors->has('author'))
+        @if($errors->has('author'))
             <p>{{$errors->first('author')}}</p>
-        @endif --}}
+        @endif
         <br>
         Année: <input type='number' name='year' placeholder="Année du livre" value='{{old('year')}}' required>
-        {{-- @if($errors->has('year'))
+        @if($errors->has('year'))
             <p>{{$errors->first('year')}}</p>
-        @endif --}}
+        @endif
         <br>
        Genre:<select name="gender_id">
             @foreach ($genders as $gender)
@@ -36,13 +40,9 @@
                 >{{$gender['name']}}</option>
             @endforeach
         </select>
-        {{-- @if($errors->has('gender'))
-            <p>{{$errors->first('gender')}}</p>
-        @endif --}}
-       image: <input type='text' name='image' placeholder="Image" value='{{old('image')}}'>
-        {{-- @if($errors->has('img'))
-            <p>{{$errors->first('img')}}</p>
-        @endif --}}
+        @if($errors->has('gender_id'))
+            <p>{{$errors->first('gender_id')}}</p>
+        @endif
         <br>
         <input type='submit' value='Créer'>
     </form>

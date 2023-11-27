@@ -9,7 +9,7 @@ class Book extends Model
 {
     use HasFactory;
 
-    protected $fillable =['image','title', 'author', 'year', 'note' ];
+    protected $fillable =['image','title', 'author', 'year', 'note', 'gender_id' ];
 
     public static function getAll() {
         return Book::select('books.*', 'genders.name as gender')
