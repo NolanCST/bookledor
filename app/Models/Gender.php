@@ -13,6 +13,12 @@ class Gender extends Model
     protected $fillable = ['name'];
 
     public function book (): HasMany {
-        return $this->HasMany(Pokemon::class);
+        return $this->HasMany(Book::class);
+    }
+
+    public function getAll() {
+        return Book::select('books.*', 'genders.name as gender')
+            ->join('genders', 'books.gender_id', '=', 'genders.id')
+            ->get();
     }
 }

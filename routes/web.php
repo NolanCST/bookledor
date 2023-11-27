@@ -18,4 +18,4 @@ Route::get('/', function () {
     return redirect(route('book.index'));
 });
 
-Route::resource('book',Book::class);
+Route::resource('book',BookController::class);
