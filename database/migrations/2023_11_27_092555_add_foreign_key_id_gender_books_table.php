@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\Gender;
 
 return new class extends Migration
 {
@@ -11,11 +12,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('password_reset_tokens', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
-            $table->string('email')->primary();
-            $table->string('token');
-            $table->timestamp('created_at')->nullable();
+        Schema::table('books', function (Blueprint $table) {
+            $table->foreignIdFor(Gender::class)->constrained();
         });
     }
 
@@ -24,6 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('password_reset_tokens');
+        Schema::table('books', function (Blueprint $table) {
+            $table->dropForeignIdFor(Gender::class);
+            $table->dropColumn('id_genders');
+        });
     }
 };

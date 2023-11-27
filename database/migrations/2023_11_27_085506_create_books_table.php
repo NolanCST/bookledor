@@ -12,7 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('books', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->id();
+            $table->binary('image');
+            $table->text('title');
+            $table->text('author');
+            $table->integer('year');
+            $table->integer('note');
             $table->timestamps();
         });
     }
