@@ -27,11 +27,19 @@
             <p>{{$errors->first('year')}}</p>
         @endif --}}
         <br>
-       Genre: <input type='text' name='gender' placeholder="Genre du livre" value='{{old('gender')}}' required>
+       Genre:<select name="gender_id">
+            @foreach ($genders as $gender)
+                <option value='{{$gender['id']}}'
+                    @if ($gender['id']==old('gender_id'))
+                    selected
+                    @endif
+                >{{$gender['name']}}</option>
+            @endforeach
+        </select>
         {{-- @if($errors->has('gender'))
             <p>{{$errors->first('gender')}}</p>
         @endif --}}
-       image: <input type='files' name='img' placeholder="img" value='{{old('img')}}'>
+       image: <input type='text' name='image' placeholder="Image" value='{{old('image')}}'>
         {{-- @if($errors->has('img'))
             <p>{{$errors->first('img')}}</p>
         @endif --}}

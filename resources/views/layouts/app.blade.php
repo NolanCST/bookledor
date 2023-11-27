@@ -8,7 +8,7 @@
 </head>
 <body>
     <header>
-        <h1>@yield('title')</h1>
+        <h1>@yield('titlePage')</h1>
         <nav>
             <p>logo</p>
             <a href="{{route('book.index')}}">Liste des livres</a> 

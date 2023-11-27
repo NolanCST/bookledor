@@ -15,10 +15,4 @@ class Gender extends Model
     public function book (): HasMany {
         return $this->HasMany(Book::class);
     }
-
-    public function getAll() {
-        return Book::select('books.*', 'genders.name as gender')
-            ->join('genders', 'books.gender_id', '=', 'genders.id')
-            ->get();
-    }
 }

@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+ 
+use App\Models\Gender;
 use App\Models\Book;
 use Illuminate\Http\Request;
 
@@ -21,7 +22,8 @@ class BookController extends Controller
      */
     public function create()
     {
-        return view('book.create');
+        $genders = Gender::all()->sortBy('name');
+        return view('book.create', compact('genders'));
     }
 
     /**
@@ -29,7 +31,27 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $actualyear = date ("Y");
+        $request->validate([
+            'title' => 'required|max:50',
+            'author' => 'required|max:50',
+            'year' => 'required|numeric|integer|max:2023',
+             'genders' => 'required|exists:genders,id',
+        ]);
+
+       Book::create([
+            'title' => $request->title,
+            'author' => $request->author,
+            'year' => $request->year,
+            'gender_id' => $request->gender_id
+        ]);
+
+        $title = $request -> title;
+        $author = $request -> author;
+        $year = $request -> year;
+        $gender = $request -> gender_id;
+
+        return view('book.store', compact ('title', 'author', 'year','gender'));
     }
 
     /**
