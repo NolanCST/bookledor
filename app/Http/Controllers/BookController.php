@@ -32,26 +32,32 @@ class BookController extends Controller
     public function store(Request $request)
     {
         // $actualyear = date ("Y");
-        // $request->validate([
-        //     'title' => 'required|max:50',
-        //     'author' => 'required|max:50',
-        //     'year' => 'required|numeric|integer|max:2023',
-        //     'genders' => 'required|exists:genders,id',
-        // ]);
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'title' => 'required|max:50',
+            'author' => 'required|max:50',
+            'year' => 'required|numeric|integer|max:2023',
+            'gender_id' => 'required|exists:genders,id',
+        ]);
 
-       Book::create([
+        $fileName = time() . '.' . $request->image->getClientOriginalName();
+        $path = $request->image->storeAs('public/images', $fileName);
+
+        Book::create([
+            'image' => $fileName,
             'title' => $request->title,
             'author' => $request->author,
             'year' => $request->year,
             'gender_id' => $request->gender_id
         ]);
 
+        $image = $fileName;
         $title = $request -> title;
         $author = $request -> author;
         $year = $request -> year;
         $gender = $request -> gender_id;
 
-        return view('book.store', compact ('title', 'author', 'year', 'gender'));
+        return view('book.store', compact ('image','title', 'author', 'year', 'gender'));
     }
 
     /**
@@ -59,7 +65,7 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        //
+        return view('book.show', compact('book'));
     }
 
     /**

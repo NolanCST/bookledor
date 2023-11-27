@@ -3,19 +3,12 @@
 @section('title', 'Création d\'un nouveau livre')
 
 @section('content')
-    {{-- @if($errors->any())
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{$error}}</li>
-            @endforeach
-        </ul>
-    @endif --}}
-    <form action='{{route("book.store")}}' method='post'>
+    <form action='{{route("book.store")}}' method='post' enctype="multipart/form-data">
         @csrf
-        {{-- image: <input type='text' name='image' placeholder="Image" value='{{old('image')}}'> --}}
-        {{-- @if($errors->has('image'))
+        image: <input type='file' name='image'>
+        @if($errors->has('image'))
             <p>{{$errors->first('image')}}</p>
-            @endif --}}
+            @endif
         Titre: <input type='text' name='title' placeholder='Titre du livre' value='{{old('title')}}' required>
         @if($errors->has('title'))
             <p>{{$errors->first('title')}}</p>
