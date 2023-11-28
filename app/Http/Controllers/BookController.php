@@ -48,7 +48,8 @@ class BookController extends Controller
             'title' => $request->title,
             'author' => $request->author,
             'year' => $request->year,
-            'gender_id' => $request->gender_id
+            'gender_id' => $request->gender_id,
+            'user_id' => $request->user()->id
         ]);
 
         $image = $fileName;
@@ -65,6 +66,7 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
+        $book['gender'] = $book->getGender();
         return view('book.show', compact('book'));
     }
 

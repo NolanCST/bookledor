@@ -4,9 +4,10 @@
     <h1>{{$book['title']}}</h1>
 @endsection
 @section('content')
-    <img src="/storage/images/{{$book['image']}}"/>
+    <img class="showImage" src="/storage/images/{{$book['image']}}"/>
     <h4>Ecrit par: {{$book['author']}}</h4>
     <p>Annee de sortie: {{$book['year']}}<p>
+    <p>Genre: {{$book['gender']}}<p>
     {{-- <form action="{{route('blog.edit', $blog['id'])}}" method="get">
         @csrf
         <input type="submit" value="Modifier"/>
