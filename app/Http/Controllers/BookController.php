@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Gender;
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {
@@ -75,7 +76,8 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        //
+        $genders = Gender::all()->sortBy('name');
+        return view('book.edit', compact('book', 'genders'));
     }
 
     /**
@@ -83,7 +85,34 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-        //
+        $request->validate([
+            
+            'image' => 'required',
+            'title' => 'required',
+            'author' => 'required',
+            'year' => 'required|numeric|integer|max:2023',
+            'gender_id' => 'required|exists:genders,id',
+        ]);
+
+        // if($book->image){
+        //     unlink('public/images/' . $book->image);
+        // }
+
+        //dd(Storage::allFiles('public/images'));
+        Storage::delete('public/images/'.$book->image);
+
+        $fileName = time() . '.' . $request->image->getClientOriginalName();
+        $path = $request->image->storeAs('public/images', $fileName);
+
+        $book->image = $fileName;
+        $book->title = $request->title;
+        $book->author = $request->author;
+        $book->year = $request->year;
+        $book->gender_id = $request->gender_id;
+
+        $book->save();
+
+        return redirect(route('book.show', $book['id']));
     }
 
     /**
