@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('book.index') }}">
-                        <img src="/storage/images/logoNavBar.png" />
+                        <img src="/images/logoNavBar.png" />
                     </a>
                 </div>
 

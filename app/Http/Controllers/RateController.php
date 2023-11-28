@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Note;
+use App\Models\Rate;
 use Illuminate\Http\Request;
 
-class NoteController extends Controller
+class RateController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class NoteController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Note $note)
+    public function show(Rate $rate)
     {
         //
     }
@@ -42,7 +42,7 @@ class NoteController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Note $note)
+    public function edit(Rate $rate)
     {
         //
     }
@@ -50,7 +50,7 @@ class NoteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Note $note)
+    public function update(Request $request, Rate $rate)
     {
         //
     }
@@ -58,7 +58,7 @@ class NoteController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Note $note)
+    public function destroy(Rate $rate)
     {
         //
     }
