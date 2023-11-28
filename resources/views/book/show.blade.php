@@ -9,8 +9,15 @@
     <h4>Ecrit par: {{$book['author']}}</h4>
     <p>Annee de sortie: {{$book['year']}}<p>
     <p>Genre: {{$book['gender']}}<p>
-    <form action="{{route('book.edit', $book['id'])}}" method="get">
-        @csrf
-        <input type="submit" value="Modifier"/>
-    </form>
+    @if($id == $book['user_id'])
+        <form action="{{route('book.edit', $book['id'])}}" method="get">
+            @csrf
+            <input type="submit" value="Modifier"/>
+        </form>
+        <form action="{{route('book.destroy', $book['id'])}}" method="post">
+            @csrf
+            @method('delete')
+            <input type="submit" value="Supprimer"/>
+        </form>
+    @endif
 @endsection
