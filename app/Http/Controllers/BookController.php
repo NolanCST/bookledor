@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
+app()->setLocale('fr');
 class BookController extends Controller
 {
     /**
@@ -33,12 +34,13 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        // $actualyear = date ("Y");
+        $actualyear = date("Y");
+
         $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'title' => 'required|max:50',
             'author' => 'required|max:50',
-            'year' => 'required|numeric|integer|max:2023',
+            'year' => 'required|numeric|integer|max:' . $actualyear, 
             'gender_id' => 'required|exists:genders,id',
         ]);
 
