@@ -9,5 +9,5 @@ class Rate extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['rate'];
+    protected $fillable = ['rate', 'review', 'user_id', 'book_id'];
 }

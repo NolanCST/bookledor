@@ -4,62 +4,45 @@ namespace App\Http\Controllers;
 
 use App\Models\Rate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Session;
 
 class RateController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
+    public function addRating(Request $request) {
+        if($request->isMethod('POST')){
+            $data = $request->all();
+            // echo "<pre>"; print_r($data); 
+            // die;
+            if(!Auth::check()){
+                $message = "Vous devez etre connecte pour noter ce livre";
+                // Session::flash('error_message', $message);
+                return redirect()->back();
+            }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+            if(!isset($data['rate'])) {
+                $message = "Merci de mettre au moins une etoile pour ce livre";
+                // Session::flash('error_message', $message);
+                return redirect()->back();
+            }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Rate $rate)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Rate $rate)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Rate $rate)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Rate $rate)
-    {
-        //
+            $ratingCount = Rate::where(['user_id'=>Auth::user()->id, 'book_id'=>$data['book_id']])->count();
+            if($ratingCount>0){
+                $message = "Votre notes a deja ete prise en compte pour ce livre.";
+                // Session::flash('error_message', $message);
+                return redirect()->back();
+            } else {
+                $rating = new Rate;
+                $rating->user_id = Auth::user()->id;
+                $rating->book_id = $data['book_id'];
+                $rating->review = $data['review'];
+                $rating->rate = $data['rate'];
+                $rating->status = 0;
+                $rating->save();
+                $message = "Merci d'avoir note ce livre !";
+                // Session::flash('success_message', $message);
+                return redirect()->back();
+            }
+        }
     }
 }

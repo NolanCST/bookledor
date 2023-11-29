@@ -11,6 +11,7 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         <link href="/style.css" rel="stylesheet" />
+        <link href="/show.css" rel="stylesheet" />
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -34,4 +35,9 @@
             </main>
         </div>
     </body>
+    <script>
+        $('#addStar').change('.star', function(e) {
+        $(this).submit();
+        });
+    </script>
 </html>
