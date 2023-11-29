@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('rates', function (Blueprint $table) {
             $table->id();
+            $table->text('review');
             $table->integer('rate');
+            $table->tinyInteger('status');
             $table->timestamps();
         });
     }
