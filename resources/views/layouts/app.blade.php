@@ -34,6 +34,10 @@
                 @yield('content')
             </main>
         </div>
+        <footer>
+             @include('layouts.footer')
+
+        </footer>
     </body>
     <script>
         $('#addStar').change('.star', function(e) {
