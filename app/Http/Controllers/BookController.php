@@ -6,6 +6,7 @@ use App\Models\Gender;
 use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
@@ -44,7 +45,7 @@ class BookController extends Controller
         $fileName = time() . '.' . $request->image->getClientOriginalName();
         $path = $request->image->storeAs('public/images', $fileName);
 
-        Book::create([
+        $book = Book::create([
             'image' => $fileName,
             'title' => $request->title,
             'author' => $request->author,
@@ -57,7 +58,7 @@ class BookController extends Controller
         $title = $request -> title;
         $author = $request -> author;
         $year = $request -> year;
-        $gender = $request -> gender_id;
+        $gender = $book->getGender();
 
         return view('book.store', compact ('image','title', 'author', 'year', 'gender'));
     }
@@ -67,8 +68,9 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
+        $id = Auth::id();
         $book['gender'] = $book->getGender();
-        return view('book.show', compact('book'));
+        return view('book.show', compact('book', 'id'));
     }
 
     /**
@@ -76,6 +78,7 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
+
         $genders = Gender::all()->sortBy('name');
         return view('book.edit', compact('book', 'genders'));
     }
@@ -94,11 +97,6 @@ class BookController extends Controller
             'gender_id' => 'required|exists:genders,id',
         ]);
 
-        // if($book->image){
-        //     unlink('public/images/' . $book->image);
-        // }
-
-        //dd(Storage::allFiles('public/images'));
         Storage::delete('public/images/'.$book->image);
 
         $fileName = time() . '.' . $request->image->getClientOriginalName();
@@ -120,6 +118,8 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        Storage::delete('public/images/'.$book->image);
+        $book->delete();
+        return redirect(route('book.index'));
     }
 }
