@@ -13,7 +13,6 @@
             </h1>
         </div>
         @foreach($searchedBooks as $searchedBook)
-                <li>
                     <figure class='book'>        
                         <!-- Front -->        
                         <ul class='hardcover_front'>
@@ -45,7 +44,6 @@
                             <h1>{{$searchedBook['title']}}</h1>
                         </figcaption>
                     </figure>
-                </li>
             @endforeach
     </div>
 @endsection
