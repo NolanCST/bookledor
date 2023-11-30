@@ -5,8 +5,9 @@
 @endsection
 @section('content')
     <img src="/storage/images/{{$image}}" alt="Image du livre" />
-    <p>titre: {{$title}} </p>
-    <p>Auteur: {{$author}} </p>
-    <p>année: {{$year}} </p>
-    <p>genre: {{$gender}} </p>
+    <p>titre: {{$title}}</p>
+    <p>Description: {{$description}}</p>
+    <p>Auteur: {{$author}}</p>
+    <p>année: {{$year}}</p>
+    <p>genre: {{$gender}}</p>
 @endsection

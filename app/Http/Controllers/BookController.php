@@ -40,6 +40,7 @@ class BookController extends Controller
         $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'title' => 'required|max:50',
+            'description' => 'required',
             'author' => 'required|max:50',
             'year' => 'required|numeric|integer|max:' . $actualyear, 
             'gender_id' => 'required|exists:genders,id',
@@ -51,6 +52,7 @@ class BookController extends Controller
         $book = Book::create([
             'image' => $fileName,
             'title' => $request->title,
+            'description' => $request->description,
             'author' => $request->author,
             'year' => $request->year,
             'gender_id' => $request->gender_id,
@@ -58,12 +60,13 @@ class BookController extends Controller
         ]);
 
         $image = $fileName;
-        $title = $request -> title;
-        $author = $request -> author;
-        $year = $request -> year;
+        $title = $request->title;
+        $description = $request->description;
+        $author = $request->author;
+        $year = $request->year;
         $gender = $book->getGender();
 
-        return view('book.store', compact ('image','title', 'author', 'year', 'gender'));
+        return view('book.store', compact ('image','title', 'description', 'author', 'year', 'gender'));
     }
 
     /**
@@ -80,8 +83,13 @@ class BookController extends Controller
         // Faire la moyenne des notes
         $ratingsSum = Rate::where('status', 1)->where('book_id', $book['id'])->sum('rate');
         $ratingsCount = Rate::where('status', 1)->where('book_id', $book['id'])->count();
-        $avgRating = round($ratingsSum/$ratingsCount,2);
-        $avgStarRating = round($ratingsSum/$ratingsCount);
+        $avgRating = 0;
+        $avgStarRating = 0;
+        if ($ratingsCount>0){
+            $avgRating = round($ratingsSum/$ratingsCount,2);
+            $avgStarRating = round($ratingsSum/$ratingsCount);
+        }
+
 
         return view('book.show', compact('book', 'id', 'ratings', 'avgRating', 'avgStarRating'));
     }
@@ -103,10 +111,11 @@ class BookController extends Controller
     {
         $request->validate([
             
-            'image' => 'required',
-            'title' => 'required',
-            'author' => 'required',
-            'year' => 'required|numeric|integer|max:2023',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'title' => 'required|max:50',
+            'description' => 'required',
+            'author' => 'required|max:50',
+            'year' => 'required|numeric|integer|max:' . $actualyear, 
             'gender_id' => 'required|exists:genders,id',
         ]);
 
@@ -117,6 +126,7 @@ class BookController extends Controller
 
         $book->image = $fileName;
         $book->title = $request->title;
+        $book->description = $request->description;
         $book->author = $request->author;
         $book->year = $request->year;
         $book->gender_id = $request->gender_id;

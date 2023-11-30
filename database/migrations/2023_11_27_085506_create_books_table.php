@@ -15,6 +15,7 @@ return new class extends Migration
             $table->engine = 'InnoDB';
             $table->id();
             $table->binary('image');
+            $table->text('description');
             $table->text('title');
             $table->text('author');
             $table->integer('year');

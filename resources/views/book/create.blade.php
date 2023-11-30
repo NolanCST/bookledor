@@ -59,6 +59,12 @@
         <p class="error-message">{{ $errors->first('title') }}</p>
     @endif
 
+    <label for="description">Description:</label>
+    <textarea name='description' id="description" placeholder='Description du livre' value='{{ old('description') }}' class="form-input" style="height:125px;"></textarea>
+    @if($errors->has('description'))
+    <p class="error-message">{{ $errors->first('description') }}</p>
+    @endif
+
     <label for="author">Auteur:</label>
     <input type='text' name='author' id="author" placeholder="Auteur du livre" value='{{ old('author') }}' class="form-input" required>
     @if($errors->has('author'))
