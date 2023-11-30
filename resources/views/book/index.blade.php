@@ -41,6 +41,17 @@
                     </figure>
                 </li>
             @endforeach
+            <div>
+                <div class="pagination">
+                    {{ $books->appends(request()->query())->links() }}
+                </div>
+                <style>
+                    p.text-sm.text-gray-700.leading-5 {
+                    display:none;
+                }
+                </style>
+                
+            </div>
         </ul>  
     </div>
 @endsection
