@@ -152,13 +152,12 @@ class BookController extends Controller
     public function search(Request $request)
     {
         $key = trim($request->get('q'));
-        $genders = Gender::all();
         $searchedBooks = Book::query()
+        ->join('genders', 'books.gender_id', '=', 'genders.id')
             ->where('title', 'like', "%{$key}%")
             ->orWhere('author', 'like', "%{$key}%")
-            // ->orWhere('year', 'like', "%{$key}%")
-            // ->orWhere($genders['name'], 'like', "%{$key}%")
-            ->orderBy('created_at', 'desc')
+            ->orWhere('genders.name', 'like', "%{$key}%")
+            ->orderBy('books.created_at', 'desc')
             ->get();
     
       
