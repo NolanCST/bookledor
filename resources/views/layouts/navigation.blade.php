@@ -23,6 +23,19 @@
                         {{ __('Publier un livre') }}
                     </x-nav-link>
                 </div>
+
+                <div class="card my-4">
+                    <form class="card-body" action="/search" method="GET" role="search">
+                        {{ csrf_field() }}
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Rechercher..." name="q">
+                            <span class="input-group-btn">
+                                <button class="btnSearch" type="submit">Go!</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+
             </div>
 @isset(Auth::user()->name)
             <!-- Settings Dropdown -->
