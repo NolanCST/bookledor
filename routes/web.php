@@ -20,12 +20,20 @@ Route::get('/', function () {
     $books=Book::getAll();
     return view('book.index',compact('books'));
 });
+Route::get('/search', [BookController::class, 'search']);
 
 Route::get('/dashboard', function () {
     return redirect(route('book.index'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// pour verification adresse mail:
+// Route::get('/only-verified', function () {
+//     return view('only-verified');
+//  })->middleware(['auth', 'verified']);
+
+
 Route::middleware('auth')->group(function () {
+
     Route::resource('book',BookController::class);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

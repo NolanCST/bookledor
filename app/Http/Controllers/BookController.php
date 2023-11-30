@@ -124,4 +124,26 @@ class BookController extends Controller
         $book->delete();
         return redirect(route('book.index'));
     }
+
+
+    public function search(Request $request)
+    {
+        $key = trim($request->get('q'));
+        $genders = Gender::all();
+        $searchedBooks = Book::query()
+            ->where('title', 'like', "%{$key}%")
+            ->orWhere('author', 'like', "%{$key}%")
+            // ->orWhere('year', 'like', "%{$key}%")
+            // ->orWhere($genders['name'], 'like', "%{$key}%")
+            ->orderBy('created_at', 'desc')
+            ->get();
+    
+      
+
+        return view('book.search', compact(
+            'key',
+            'searchedBooks',
+        ));
+    }
+    
 }
