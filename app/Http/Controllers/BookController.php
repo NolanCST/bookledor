@@ -91,7 +91,7 @@ class BookController extends Controller
         }
 
 
-        return view('book.show', compact('book', 'id', 'ratings', 'avgRating', 'avgStarRating'));
+        return view('book.show', compact('book', 'id', 'ratings', 'avgRating', 'avgStarRating', 'ratingsCount'));
     }
 
     /**
