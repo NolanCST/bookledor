@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
  
 use App\Models\Gender;
+use App\Models\Rate;
 use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -72,7 +73,17 @@ class BookController extends Controller
     {
         $id = Auth::id();
         $book['gender'] = $book->getGender();
-        return view('book.show', compact('book', 'id'));
+
+        // Recuperation des notes
+        $ratings = Rate::with('user')->where('status', 1)->where('book_id', $book['id'])->orderBy('id', 'desc')->get()->toArray();
+
+        // Faire la moyenne des notes
+        $ratingsSum = Rate::where('status', 1)->where('book_id', $book['id'])->sum('rate');
+        $ratingsCount = Rate::where('status', 1)->where('book_id', $book['id'])->count();
+        $avgRating = round($ratingsSum/$ratingsCount,2);
+        $avgStarRating = round($ratingsSum/$ratingsCount);
+
+        return view('book.show', compact('book', 'id', 'ratings', 'avgRating', 'avgStarRating'));
     }
 
     /**
