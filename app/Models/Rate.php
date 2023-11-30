@@ -10,4 +10,8 @@ class Rate extends Model
     use HasFactory;
 
     protected $fillable = ['rate', 'review', 'user_id', 'book_id'];
+
+    public function user() {
+        return $this->beLongsTo('App\Models\User', 'user_id');
+    }
 }

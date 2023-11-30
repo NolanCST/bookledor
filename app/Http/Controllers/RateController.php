@@ -12,8 +12,6 @@ class RateController extends Controller
     public function addRating(Request $request) {
         if($request->isMethod('POST')){
             $data = $request->all();
-            // echo "<pre>"; print_r($data); 
-            // die;
             if(!Auth::check()){
                 $message = "Vous devez etre connecte pour noter ce livre";
                 // Session::flash('error_message', $message);
@@ -37,7 +35,7 @@ class RateController extends Controller
                 $rating->book_id = $data['book_id'];
                 $rating->review = $data['review'];
                 $rating->rate = $data['rate'];
-                $rating->status = 0;
+                $rating->status = 1;
                 $rating->save();
                 $message = "Merci d'avoir note ce livre !";
                 // Session::flash('success_message', $message);
