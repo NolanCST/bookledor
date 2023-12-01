@@ -28,7 +28,7 @@
                             <ul class='page'>
                                 <li></li>
                                 <li>
-                                    <a class="btn" href="{{route('book.show', $book)}}">Trop chaud les bougres d'or !<br> Il est où le diplôme ?</a>
+                                    <a class="btn" href="{{route('book.show', $book)}}">Découvir ce livre</a>
                                 </li>
                                 <li></li>
                                 <li></li>

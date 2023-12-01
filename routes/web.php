@@ -30,10 +30,11 @@ Route::get('/dashboard', function () {
 //     return view('only-verified');
 //  })->middleware(['auth', 'verified']);
 
+Route::get('/book', [BookController::class, 'index'])->name('book.index');
 
 Route::middleware('auth')->group(function () {
 
-    Route::resource('book',BookController::class);
+    Route::resource('book',BookController::class)->except(['index']);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
