@@ -51,7 +51,7 @@
                 @endforeach
                 <div>
                     <div class="pagination">
-                        {{-- {{ $books->appends(request()->query())->links() }} --}}
+                        {{ $books->appends(request()->query())->links() }}
                     </div>
                 </div>
             </ul>  
