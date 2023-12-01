@@ -66,7 +66,16 @@
     @endif
 
     <label for="author">Auteur:</label>
-    <input type='text' name='author' id="author" placeholder="Auteur du livre" value='{{ old('author') }}' class="form-input" required>
+    <select name="author" id="author" class="form-input">
+        @foreach ($authors as $author)
+            <option value='{{ $author['id'] }}'
+                @if ($author['id'] == old('gender_id'))
+                    selected
+                @endif
+            >{{ $author['name'] }}</option>
+        @endforeach
+    </select>
+    <p>Vous ne trouvez pas votre auteur ? Contactez nous !</p>
     @if($errors->has('author'))
         <p class="error-message">{{ $errors->first('author') }}</p>
     @endif
