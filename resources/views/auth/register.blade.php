@@ -1,3 +1,8 @@
+<style>
+.indications {
+    font-size: 12px;
+}
+</style>
 <x-guest-layout>
     <form method="POST" action="{{ route('register') }}">
         @csrf
@@ -25,7 +30,7 @@
                             name="password"
                             required autocomplete="new-password" 
                             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*_=+]).{8,}"/>
-                            *Au moins 8 caractères, un chiffre, une lettre majuscule, une minuscule et un caractère parmi !@#$%^&*_=+.
+                           <p class="indications"> *Au moins 8 caractères, un chiffre, une lettre majuscule, une minuscule et un caractère parmi !@#$%^&*_=+.</p>
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
