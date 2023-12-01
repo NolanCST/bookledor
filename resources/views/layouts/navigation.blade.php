@@ -5,6 +5,7 @@
     .form-control {
         width: 60%;
         margin-top: 10px;
+        
     }
    </style>
 

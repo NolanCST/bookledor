@@ -746,12 +746,6 @@ figcaption p {
     line-height: 1.3;
 }
 
-/* NavBar */
-
-.form-control {
-    margin-left: 3%;
-}
-
 .input-group {
     width: 50vw;
 }
@@ -777,17 +771,5 @@ figcaption p {
         padding-left: 0;
         left: -80px;
         font-size: 90%;
-    }
-}
-
-@media screen and (max-width: 576px) {
-    .form-control {
-        width: 200px;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .form-control {
-        width: 125px;
     }
 }
