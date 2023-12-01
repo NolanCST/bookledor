@@ -8,7 +8,7 @@ use Illuminate\Database\Seeder;
 
 class GenderSeeder extends Seeder
 {
-    private $liste = ['novels', 'BD', 'poetry', 'magazine', 'childrens_books', 'cookbooks', 'biography', 'fanzines', 'mangas', 'manuals', 'theatres', 'tales_legends',];
+    private $liste = ['Roman', 'BD', 'Poesie', 'magazine', 'Livre pour enfants', 'Livre de cuisines', 'Biographie', 'Fanzine', 'Manga', 'Manuel', 'Theatre', 'Contes et Legendes',];
     /**
      * Run the database seeds.
      */

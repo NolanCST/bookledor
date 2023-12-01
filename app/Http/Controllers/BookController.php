@@ -159,13 +159,9 @@ class BookController extends Controller
             ->orWhere('genders.name', 'like', "%{$key}%")
             ->orderBy('books.created_at', 'desc')
             ->get();
-    
-      
-
         return view('book.search', compact(
             'key',
             'searchedBooks',
         ));
     }
-    
 }
