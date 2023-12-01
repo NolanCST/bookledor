@@ -160,12 +160,13 @@ class BookController extends Controller
 
     $query = Book::select('books.*')
         ->join('genders', 'books.gender_id', '=', 'genders.id')
+        ->join('authors', 'books.author_id', '=', 'authors.id')
         ->orderBy('books.created_at', 'desc');
 
     if ($searchField == 'title') {
         $searchedBooks = $query->where('title', 'like', "%{$key}%")->get();
     } elseif ($searchField == 'author') {
-        $searchedBooks = $query->where('author', 'like', "%{$key}%")->get();
+        $searchedBooks = $query->where('authors.name', 'like', "%{$key}%")->get();
     } elseif ($searchField == 'gender') {
         $searchedBooks = $query->where('genders.name', 'like', "%{$key}%")->get();
     } else {
