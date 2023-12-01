@@ -40,8 +40,14 @@
                         {{ csrf_field() }}
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Rechercher..." name="q">
+                            <select name="search" id="searchSelect" class="searchSelect">
+                                <option selected="selected" value="title">Choisir</option>
+                                <option value="title">Titre</option>
+                                <option value="author">Auteur</option>
+                                <option value="gender">Genre</option>
+                            </select>
                             <span class="input-group-btn">
-                                <button class="btnSearch" type="submit">  🔎</button>
+                                <button class="btnSearch" type="submit">🔎</button>
                             </span>
                         </div>
                     </form>

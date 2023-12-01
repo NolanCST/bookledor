@@ -148,18 +148,26 @@ class BookController extends Controller
 
 
     public function search(Request $request)
-    {
-        $key = trim($request->get('q'));
-        $searchedBooks = Book::query()
+{
+    $searchField = $request->input('search'); // Utilisez le champ de recherche
+
+    $key = trim($request->get('q'));
+
+    $query = Book::select('books.*')
         ->join('genders', 'books.gender_id', '=', 'genders.id')
-            ->where('title', 'like', "%{$key}%")
-            ->orWhere('author', 'like', "%{$key}%")
-            ->orWhere('genders.name', 'like', "%{$key}%")
-            ->orderBy('books.created_at', 'desc')
-            ->get();
-        return view('book.search', compact(
-            'key',
-            'searchedBooks',
-        ));
+        ->orderBy('books.created_at', 'desc');
+
+    if ($searchField == 'title') {
+        $searchedBooks = $query->where('title', 'like', "%{$key}%")->get();
+    } elseif ($searchField == 'author') {
+        $searchedBooks = $query->where('author', 'like', "%{$key}%")->get();
+    } elseif ($searchField == 'gender') {
+        $searchedBooks = $query->where('genders.name', 'like', "%{$key}%")->get();
+    } else {
+        // Si aucun champ de recherche n'est spécifié, vous pouvez ajuster le comportement ici.
+        $searchedBooks = $query->get();
     }
+
+    return view('book.search', compact('key', 'searchedBooks'));
+}
 }
