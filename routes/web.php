@@ -17,8 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $books=Book::getAll();
-    return view('book.index',compact('books'));
+    return redirect(route('book.index'));
 });
 Route::get('/search', [BookController::class, 'search']);
 
