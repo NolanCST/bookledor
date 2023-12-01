@@ -1,3 +1,13 @@
+<style>
+    .input-group {
+        text-align: center;
+    }
+    .form-control {
+        width: 60%;
+        margin-top: 10px;
+    }
+   </style>
+
 <nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -30,7 +40,7 @@
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Rechercher..." name="q">
                             <span class="input-group-btn">
-                                <button class="btnSearch" type="submit">Go!</button>
+                                <button class="btnSearch" type="submit">  🔎</button>
                             </span>
                         </div>
                     </form>
