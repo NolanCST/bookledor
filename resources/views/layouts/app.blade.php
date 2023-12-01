@@ -36,7 +36,6 @@
         </div>
         <footer>
              @include('layouts.footer')
-
         </footer>
     </body>
     <script>
