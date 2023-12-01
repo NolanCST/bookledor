@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
  
 use App\Models\Gender;
+use App\Models\Author;
 use App\Models\Rate;
 use App\Models\Book;
 use Illuminate\Http\Request;
@@ -27,7 +28,8 @@ class BookController extends Controller
     public function create()
     {
         $genders = Gender::all()->sortBy('name');
-        return view('book.create', compact('genders'));
+        $authors = Author::all()->sortBy('name');
+        return view('book.create', compact('genders', 'authors'));
     }
 
     /**
@@ -41,7 +43,7 @@ class BookController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'title' => 'required|max:50',
             'description' => 'required',
-            'author' => 'required|max:50',
+            'author' => 'required|exists:authors,id',
             'year' => 'required|numeric|integer|max:' . $actualyear, 
             'gender_id' => 'required|exists:genders,id',
         ]);
@@ -53,16 +55,16 @@ class BookController extends Controller
             'image' => $fileName,
             'title' => $request->title,
             'description' => $request->description,
-            'author' => $request->author,
             'year' => $request->year,
             'gender_id' => $request->gender_id,
-            'user_id' => $request->user()->id
+            'user_id' => $request->user()->id,
+            'author_id' => $request->author
         ]);
 
         $image = $fileName;
         $title = $request->title;
         $description = $request->description;
-        $author = $request->author;
+        $author = $book->getAuthor();
         $year = $request->year;
         $gender = $book->getGender();
 
@@ -76,6 +78,7 @@ class BookController extends Controller
     {
         $id = Auth::id();
         $book['gender'] = $book->getGender();
+        $book['author'] = $book->getAuthor();
 
         // Recuperation des notes
         $ratings = Rate::with('user')->where('status', 1)->where('book_id', $book['id'])->orderBy('id', 'desc')->get()->toArray();
@@ -99,9 +102,9 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-
+        $authors = Author::all()->sortBy('name');
         $genders = Gender::all()->sortBy('name');
-        return view('book.edit', compact('book', 'genders'));
+        return view('book.edit', compact('book', 'genders', 'authors'));
     }
 
     /**
@@ -109,12 +112,14 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
+        $actualyear = date("Y");
+
         $request->validate([
             
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'title' => 'required|max:50',
             'description' => 'required',
-            'author' => 'required|max:50',
+            'author' => 'required|exists:authors,id',
             'year' => 'required|numeric|integer|max:' . $actualyear, 
             'gender_id' => 'required|exists:genders,id',
         ]);
@@ -127,7 +132,7 @@ class BookController extends Controller
         $book->image = $fileName;
         $book->title = $request->title;
         $book->description = $request->description;
-        $book->author = $request->author;
+        $book->author_id = $request->author;
         $book->year = $request->year;
         $book->gender_id = $request->gender_id;
 

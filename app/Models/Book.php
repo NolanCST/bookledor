@@ -9,16 +9,22 @@ class Book extends Model
 {
     use HasFactory;
 
-    protected $fillable =['image','title', 'description', 'author', 'year', 'note', 'gender_id', 'user_id', 'created_at' ];
+    protected $fillable =['image','title', 'description', 'author', 'year', 'note', 'gender_id', 'user_id', 'author_id', 'created_at' ];
 
     public static function getAll() {
         return Book::select('books.*', 'genders.name as gender')
             ->join('genders', 'books.gender_id', '=', 'genders.id')
+            ->join('authors', 'books.author_id', '=', 'authors.id')
             ->get();
     }
 
     public function getGender() {
         $gender = Gender::find($this->gender_id);
         return $gender->name;
+    }
+
+    public function getAuthor() {
+        $author = Author::find($this->author_id);
+        return $author->name;
     }
 }
