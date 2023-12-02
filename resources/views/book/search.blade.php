@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Modifier Livre')
+@section('title', 'Rechercher Livre')
 @section('titlePage')
 <h2>Resultats conernants la recherche {{$key}}</h2>
 @endsection
