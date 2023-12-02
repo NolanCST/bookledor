@@ -169,6 +169,8 @@ class BookController extends Controller
         $searchedBooks = $query->where('authors.name', 'like', "%{$key}%")->get();
     } elseif ($searchField == 'gender') {
         $searchedBooks = $query->where('genders.name', 'like', "%{$key}%")->get();
+    } elseif ($searchField == 'year') {
+        $searchedBooks = $query->where('year', 'like', "%{$key}%")->get();
     } else {
         // Si aucun champ de recherche n'est spécifié, vous pouvez ajuster le comportement ici.
         $searchedBooks = $query->get();

@@ -11,6 +11,7 @@
     input.form-control {
         width: 40%;
     }
+
     }
    </style>
 
@@ -20,7 +21,7 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center">
+                <div class="shrink-0 flex logo items-center">
                     <a href="{{ route('book.index') }}">
                         <img src="/images/logoNavBar.png" />
                     </a>
@@ -50,6 +51,7 @@
                                 <option value="title">Titre</option>
                                 <option value="author">Auteur</option>
                                 <option value="gender">Genre</option>
+                                <option value="gender">Année</option>
                             </select>
                             <span class="input-group-btn">
                                 <button class="btnSearch" type="submit">🔎</button>
