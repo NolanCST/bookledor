@@ -7,11 +7,11 @@
         margin-top: 10px;
         
     }
-    /* @media (max-width: 700px) {
+    @media (max-width: 700px) {
     input.form-control {
         width: 40%;
     }
-    } */
+    }
    </style>
 
 <nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
