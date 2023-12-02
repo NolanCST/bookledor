@@ -21,6 +21,8 @@ Route::get('/', function () {
 });
 Route::get('/search', [BookController::class, 'search']);
 
+Route::get('/filter', [BookController::class, 'filter']);
+
 Route::get('/dashboard', function () {
     return redirect(route('book.index'));
 })->middleware(['auth', 'verified'])->name('dashboard');

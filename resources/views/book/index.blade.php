@@ -11,6 +11,93 @@
             justify-content: center
         }
     </style>
+
+
+<div class="container filter-container">
+    <h1>Rechercher selon :</h1>
+    <div>
+        <form action="/filter" method="GET">
+            {{ csrf_field() }}
+            <div class="input-group">
+               
+
+              <!-- Select pour l'auteur -->
+{{-- <div class="form-group">
+    <label for="authorFilter">Auteur :</label>
+    <select name="author" id="author" class="form-input">
+        @foreach ($authors as $author)
+            <option value='{{ $author->id }}'
+                @if ($author->id == old('author'))
+                    selected
+                @endif
+            >{{ $author->name }}</option>
+        @endforeach
+    </select>
+</div> --}}
+
+
+                <!-- Select pour le genre -->
+                <div class="form-group">
+                    {{-- <label for="genreFilter">Genre :</label>
+                    <select name="gender_id" id="gender_id" class="form-input">
+                        @foreach ($genders as $gender)
+                            <option value='{{ $gender['id'] }}'
+                                @if ($gender['id'] == old('gender_id'))
+                                    selected
+                                @endif
+                            >{{ $gender['name'] }}</option>
+                        @endforeach
+                    </select> --}}
+                </div>
+
+                <!-- Select pour l'année -->
+                <div class="form-group">
+                    <label for="yearFilter">Année :</label>
+                    <select class="form-control" id="yearFilter" name="yearFilter">
+                        <option value="">Choisir</option>
+                
+                        @foreach ($years as $year)
+                            <option value="{{ $year }}"
+                                @if ($year == old('yearFilter'))
+                                    selected
+                                @endif
+                            >{{ $year }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <span>
+                    <button class="btnFilter" type="submit">🔎</button>
+                </span>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+    {{-- <form action="{{ route('book.filter') }}" method="GET">
+        <!-- Champ d'auteur -->
+        <div class="form-group filter-field">
+            <label for="author_filter">Auteur :</label>
+            <input type="text" name="author_filter" id="author_filter" class="form-control" value="{{ old('author_filter') }}">
+        </div>
+
+        <!-- Champ de genre -->
+        <div class="form-group filter-field">
+            <label for="genre_filter">Genre :</label>
+            <input type="text" name="genre_filter" id="genre_filter" class="form-control" value="{{ old('genre_filter') }}">
+        </div>
+
+        <!-- Champ d'année -->
+        <div class="form-group filter-field">
+            <label for="year_filter">Année :</label>
+            <input type="number" name="year_filter" id="year_filter" class="form-control" value="{{ old('year_filter') }}" min="1455">
+        </div>
+
+        <!-- Bouton de soumission -->
+        <button type="submit" class="btn btn-primary filter-btn">Filtrer</button>
+    </form> --}}
+
         <div class="component">
             <ul class="align">
             <!-- Book 1 -->
