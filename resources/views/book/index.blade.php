@@ -13,13 +13,32 @@
     </style>
 
 
-<div class="container filter-container">
-    <h1>Rechercher selon :</h1>
-    <div>
-        <form action="/filter" method="GET">
-            {{ csrf_field() }}
-            <div class="input-group">
-               
+<div>
+    <form action="/filter" method="GET">
+        {{ csrf_field() }}
+        <div>
+           
+            <select name="authorFilter">
+                <option selected="selected" value="">Auteur</option>
+                <option value="???">données à recup</option>
+            </select>
+
+            <select name="genderFilter">
+                <option selected="selected" value="">Genre</option>
+                <option value="???">données à recup</option>
+            </select>
+
+            <select name="yearFilter">
+                <option selected="selected" value="">Année</option>
+                <option value="???">données à recup</option>
+            </select>
+
+            <span>
+                <button type="submit">🔎</button>
+            </span>
+        </div>
+    </form>
+</div>
 
               <!-- Select pour l'auteur -->
 {{-- <div class="form-group">
@@ -37,7 +56,7 @@
 
 
                 <!-- Select pour le genre -->
-                <div class="form-group">
+                {{-- <div class="form-group"> --}}
                     {{-- <label for="genreFilter">Genre :</label>
                     <select name="gender_id" id="gender_id" class="form-input">
                         @foreach ($genders as $gender)
@@ -48,10 +67,10 @@
                             >{{ $gender['name'] }}</option>
                         @endforeach
                     </select> --}}
-                </div>
+                {{-- </div> --}}
 
                 <!-- Select pour l'année -->
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <label for="yearFilter">Année :</label>
                     <select class="form-control" id="yearFilter" name="yearFilter">
                         <option value="">Choisir</option>
@@ -72,7 +91,7 @@
             </div>
         </form>
     </div>
-</div>
+</div> --}}
 
 
     {{-- <form action="{{ route('book.filter') }}" method="GET">

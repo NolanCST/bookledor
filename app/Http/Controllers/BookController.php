@@ -19,7 +19,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $years = DB::table('books')->distinct()->pluck('year')->toArray();
+       
         $genders = Gender::all()->sortBy('name');
         $authors = Author::all()->sortBy('name');
         $books=Book::paginate(6);
@@ -33,7 +33,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        $years = DB::table('books')->distinct()->pluck('year')->toArray();
+      
         $genders = Gender::all()->sortBy('name');
         $authors = Author::all()->sortBy('name');
         return view('book.create', compact('genders', 'authors'));
@@ -185,9 +185,10 @@ class BookController extends Controller
 
 public function filter(request $request)
 {
+    $genders = Gender::all()->sortBy('name');
+    $authors = Author::all()->sortBy('name');
     $filterField = $request->input('filter');
 
-    $key = trim($request->get('filtrer'));
 
     $query = Book::select('books.*')
         ->join('genders', 'books.gender_id', '=', 'genders.id')
