@@ -11,6 +11,34 @@
             justify-content: center
         }
     </style>
+
+<div>
+    <form class="card-body" action="/filter" method="GET" role="search">
+        {{ csrf_field() }}
+        <div>
+           
+            <select name="authorFilter">
+                <option selected="selected" value="">Auteur</option>
+                <option value="???">données à recup</option>
+            </select>
+
+            <select name="genderFilter">
+                <option selected="selected" value="">Genre</option>
+                <option value="???">données à recup</option>
+            </select>
+
+            <select name="yearFilter">
+                <option selected="selected" value="">Année</option>
+                <option value="???">données à recup</option>
+            </select>
+
+            <span>
+                <button type="submit">🔎</button>
+            </span>
+        </div>
+    </form>
+</div>
+
         <div class="component">
             <ul class="align">
             <!-- Book 1 -->

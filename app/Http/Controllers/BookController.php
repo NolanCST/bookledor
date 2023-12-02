@@ -156,7 +156,7 @@ class BookController extends Controller
 {
     $searchField = $request->input('search'); // Utilisez le champ de recherche
 
-    $key = trim($request->get('q'));
+    $key = trim($request->get('rechercher'));
 
     $query = Book::select('books.*')
         ->join('genders', 'books.gender_id', '=', 'genders.id')
@@ -176,4 +176,28 @@ class BookController extends Controller
 
     return view('book.search', compact('key', 'searchedBooks'));
 }
+
+// public function filter(request $request)
+// {
+//     $filterField = $request->input('filter');
+
+//     $query = Book::select('books.*')
+//         ->join('genders', 'books.gender_id', '=', 'genders.id')
+//         ->orderBy('books.created_at', 'desc');
+
+//         if ($filterField == 'author') {
+//             $filteredBooks = $query->where('author', 'like', "%{$key}%")->get();
+//         } elseif ($filterField == 'gender') {
+//             $filteredBooks = $query->where('genders.name', 'like', "%{$key}%")->get();
+//         } elseif ($filterField == 'year') {
+//             $filteredBooks = $query->where('year', 'like', "%{$key}%")->get();
+//         } else {
+//             // Si aucun champ de recherche n'est spécifié, vous pouvez ajuster le comportement ici.
+//             $filteredBooks = $query->get();
+//         }
+        
+
+//     return view('book.filter', compact('key', 'filteredBooks'));
+// }
+
 }

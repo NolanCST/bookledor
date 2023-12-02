@@ -1,40 +1,27 @@
+
 @extends('layouts.app')
-@section('title', 'recherche Livre')
+@section('title', 'Filtrer Livre')
 @section('titlePage')
-<h2>Resultats conernants la recherche {{$key}}</h2>
+<h2>Resultats concernants la recherche {{$key}}</h2>
 @endsection
 
 @section('content')
-    <style>
-        .searchTitle{
-            font-size: x-large;
-            text-align: center;
-        }
-
-        /* p.text-sm.text-gray-700.leading-5 {
-        display:none;
-
-        }
-        .sm\:justify-between{
-            justify-content: center
-        } */
-    </style>
     <div class="row">
         <div class="col-md-8">
 
-            <h1 class="searchTitle my-4">Résultat de recherche pour:
+            <h1 class="filterTitle my-4">Résultat de recherche pour:
                 <small>{{$key}}</small>
             </h1>
         </div>
         <div class="component">
             <ul class="align">
-                @foreach($searchedBooks as $searchedBook)
+                @foreach($filteredBooks as $filteredBook)
                     <li>
                         <figure class='book'>        
                             <!-- Front -->        
                             <ul class='hardcover_front'>
                                 <li>
-                                    <img src="/storage/images/{{$searchedBook['image']}}" alt="" width="100%" height="100%">
+                                    <img src="/storage/images/{{$filteredBook['image']}}" alt="" width="100%" height="100%">
                                 </li>
                                 <li></li>
                             </ul>        
@@ -42,7 +29,7 @@
                             <ul class='page'>
                                 <li></li>
                                 <li>
-                                    <a class="btn" href="{{route('book.show', $searchedBook)}}">Découvrir ce livre</a>
+                                    <a class="btn" href="{{route('book.show', $filteredBook)}}">Découvrir ce livre</a>
                                 </li>
                                 <li></li>
                                 <li></li>
@@ -57,9 +44,9 @@
                                 <li></li>
                                 <li></li>
                             </ul>
-                            <figcaption>
-                                <h1>{{$searchedBook['title']}}</h1>
-                            </figcaption>
+                            {{-- <figcaption>
+                                <h1>{{$filteredBook['title']}}</h1>
+                            </figcaption> --}}
                         </figure>
                     </li>
                 @endforeach
@@ -71,4 +58,5 @@
             </ul>
         </div>
     </div>
+
 @endsection

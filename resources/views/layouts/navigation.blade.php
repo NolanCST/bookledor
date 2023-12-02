@@ -44,7 +44,7 @@
                     <form class="card-body" action="/search" method="GET" role="search">
                         {{ csrf_field() }}
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Rechercher..." name="q">
+                            <input type="text" class="form-control" placeholder="Rechercher..." name="rechercher">
                             <select name="search" id="searchSelect" class="searchSelect">
                                 <option selected="selected" value="title">Choisir</option>
                                 <option value="title">Titre</option>
