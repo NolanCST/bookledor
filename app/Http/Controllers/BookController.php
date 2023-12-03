@@ -51,6 +51,8 @@ class BookController extends Controller
         $fileName = time() . '.' . $request->image->getClientOriginalName();
         $path = $request->image->storeAs('public/images', $fileName);
 
+        $tags = explode(",", $request->tags);
+
         $book = Book::create([
             'image' => $fileName,
             'title' => $request->title,
@@ -61,6 +63,8 @@ class BookController extends Controller
             'author_id' => $request->author
         ]);
 
+        $book->tag($tags);
+
         $image = $fileName;
         $title = $request->title;
         $description = $request->description;
@@ -68,7 +72,7 @@ class BookController extends Controller
         $year = $request->year;
         $gender = $book->getGender();
 
-        return view('book.store', compact ('image','title', 'description', 'author', 'year', 'gender'));
+        return view('book.store', compact ('image','title', 'description', 'author', 'year', 'gender', 'tags'));
     }
 
     /**
@@ -79,6 +83,7 @@ class BookController extends Controller
         $id = Auth::id();
         $book['gender'] = $book->getGender();
         $book['author'] = $book->getAuthor();
+        // $book['tags'] = $book->getTags();
 
         // Recuperation des notes
         $ratings = Rate::with('user')->where('status', 1)->where('book_id', $book['id'])->orderBy('id', 'desc')->get()->toArray();

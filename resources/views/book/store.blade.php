@@ -64,6 +64,11 @@
                     <h4>Auteur: {{$author}}</h4>
                     <p>Genre: {{$gender}}<p>
                     <p>Annee: {{$year}}<p>
+                    <p>Tags:
+                    @foreach ($tags as $tag)
+                        {{$tag}}
+                    @endforeach
+                    </p>
                 </div>
             </div>
         </div>

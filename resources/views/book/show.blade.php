@@ -223,6 +223,11 @@
                     <h4>Auteur: {{$book['author']}}</h4>
                     <p>Genre: {{$book['gender']}}<p>
                     <p>Annee: {{$book['year']}}<p>
+                    {{-- <p>Tags:
+                        @foreach ($book['tags'] as $tag)
+                            {{$tag}}
+                        @endforeach
+                    </p> --}}
                 </div>
             </div>
         </div>

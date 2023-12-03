@@ -99,6 +99,13 @@
     @if($errors->has('gender_id'))
         <p class="error-message">{{ $errors->first('gender_id') }}</p>
     @endif
+
+    <label for="tags">Tags:</label>
+    <input type='text' name='tags' id="tags" placeholder="Tags" value='{{ old('tags') }}' class="form-input" data-role="tagsinput">
+    @if ($errors->has('tags'))
+        <p class="error-message">{{ $errors->first('tags') }}</p>
+    @endif
+
     <label for="image">Image:</label>
     <input type='file' name='image' id="image" class="form-input">
     @if($errors->has('image'))
