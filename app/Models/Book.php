@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Book extends Model
 {
     use HasFactory;
+    use \Conner\Tagging\Taggable;
 
     protected $fillable =['image','title', 'description', 'author', 'year', 'note', 'gender_id', 'user_id', 'author_id', 'created_at' ];
 
@@ -15,6 +16,7 @@ class Book extends Model
         return Book::select('books.*', 'genders.name as gender')
             ->join('genders', 'books.gender_id', '=', 'genders.id')
             ->join('authors', 'books.author_id', '=', 'authors.id')
+            ->join('tagging_tagged', 'books.id', '=', 'tagging_tagged.taggable_id')
             ->get();
     }
 
