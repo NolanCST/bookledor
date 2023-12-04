@@ -83,7 +83,6 @@ class BookController extends Controller
         $id = Auth::id();
         $book['gender'] = $book->getGender();
         $book['author'] = $book->getAuthor();
-        // $book['tags'] = $book->getTags();
 
         // Recuperation des notes
         $ratings = Rate::with('user')->where('status', 1)->where('book_id', $book['id'])->orderBy('id', 'desc')->get()->toArray();

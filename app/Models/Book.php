@@ -29,9 +29,4 @@ class Book extends Model
         $author = Author::find($this->author_id);
         return $author->name;
     }
-
-    // public function getTags() {
-    //     $tags = Taggable::find($this->taggable_id);
-    //     return $tags->tag_name;
-    // }
 }
